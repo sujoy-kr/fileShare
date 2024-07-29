@@ -1,0 +1,50 @@
+# uploads Folder
+uploads
+
+# Node modules
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Prisma generated files
+prisma/migrations/
+prisma/dev.db
+prisma/.env
+
+# Logs
+*.log
+
+# Dependency directories
+jspm_packages/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Environment variable files
+.env
+
+# Package-lock
+package-lock.json
+
+# Coverage directory used by testing tools
+coverage/
+
+# MacOS specific files
+*.DS_Store
+
+# Windows specific files
+*.bat
+
+# Linux specific files
+*.swp
+
+# Other files to ignore
+*.tgz
+*.gz
