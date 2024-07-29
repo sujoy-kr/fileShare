@@ -27,9 +27,6 @@ Thumbs.db
 .vscode/
 .idea/
 
-# Environment variable files
-.env
-
 # Package-lock
 package-lock.json
 
