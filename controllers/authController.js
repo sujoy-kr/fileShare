@@ -58,11 +58,5 @@ const login = async (req, res) => {
     }
 }
 
-// const getAllUser = async (req, res) => {
-//     const data = await prisma.file.findMany({
-//         include: {User: true}
-//     })
-//     res.json(data)
-// }
 
 module.exports = {register, login}
