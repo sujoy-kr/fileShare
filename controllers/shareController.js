@@ -12,6 +12,9 @@ const share = async (req, res) => {
     try {
         const token = req.params.token
 
+        // logs the user ip and agent
+        // console.log(`IP Address: ${req.ip}, User Agent: ${req.get('User-Agent')}`);
+
         if (!token) {
             return res.status(400).json({message: 'No token provided'});
         }
