@@ -1,5 +1,8 @@
 const prisma = require('../config/db')
 const jwt = require("jsonwebtoken")
+const path = require("path");
+const fs = require("fs");
+const {redisClient} = require("../config/redis");
 
 const uploadFile = async (req, res) => {
     try {
@@ -55,7 +58,43 @@ const getSharableLink = async (req, res) => {
     }
 }
 
+const deleteFile = async (req, res) => {
+    try {
+        let {id} = req.params
+        id = parseInt(id)
+
+        const file = await prisma.file.findUnique({
+            where: {
+                id
+            }
+        })
+
+        if (file) {
+            console.log('file found')
+            const filePath = path.resolve(file.fileUrl);
+            await prisma.file.delete({
+                where: {id}
+            })
+
+            console.log('file deleted')
+
+            // Delete if the file exists
+            if (fs.existsSync(filePath)) {
+                fs.unlinkSync(filePath)
+            }
+
+            res.status(200).json({message: "File Deleted"})
+        } else {
+            res.status(404).json({message: "No File Found With This Id"})
+        }
+    } catch (err) {
+        console.log(err)
+        res.status(400).json({message: "Unexpected Server Error"})
+    }
+}
+
 module.exports = {
     uploadFile,
-    getSharableLink
+    getSharableLink,
+    deleteFile
 }

@@ -36,6 +36,7 @@ const share = async (req, res) => {
 
                     // Check if the file exists
                     if (fs.existsSync(filePath)) {
+                        console.log('exists')
                         await redisClient.setEx(token, REDIS_EXP, filePath);
                         // Send the file for download
                         res.status(200).download(filePath);
