@@ -36,7 +36,6 @@ performance, and comprehensive error handling.
 - **Password Management**: Secure password storage with bcrypt hashing.
 - **Token Management**: Use `jsonwebtoken` for validating JWTs used in authentication, file access, and email
   confirmation.
--
 
 ## Technologies
 

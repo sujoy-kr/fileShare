@@ -9,6 +9,9 @@ const uploadFile = async (req, res) => {
             const user = req.data
             const userId = parseInt(user.userId)
 
+            const fileName = req.body.fileName
+            const fileUrl = req.file.path
+
             const foundUser = await prisma.user.findUnique({
                 where: {
                     id: userId
@@ -16,15 +19,26 @@ const uploadFile = async (req, res) => {
             })
 
             if (!foundUser) {
+                // delete saved image if user not found
+                const filePath = path.resolve(fileUrl);
+                // Delete file from filesystem
+                if (fs.existsSync(filePath)) {
+                    fs.unlinkSync(filePath);
+                }
                 return res.status(404).json({message: "No User Found With This Token"})
             }
 
             if (!foundUser.emailConfirmed) {
+                // delete saved image if user not verified
+                const filePath = path.resolve(fileUrl);
+                // Delete file from filesystem
+                if (fs.existsSync(filePath)) {
+                    fs.unlinkSync(filePath);
+                }
+
                 return res.status(403).json({message: "Confirm Your Email to Upload Files"})
             }
 
-            const fileName = req.body.fileName
-            const fileUrl = req.file.path
 
             const file = await prisma.file.create({
                 data: {
