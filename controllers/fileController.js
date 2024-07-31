@@ -6,7 +6,6 @@ const fs = require("fs");
 const uploadFile = async (req, res) => {
     try {
         if (req.file && req.body.fileName) {
-            console.log(req.data)
             const user = req.data
             const userId = parseInt(user.userId)
 
@@ -24,7 +23,6 @@ const uploadFile = async (req, res) => {
                 return res.status(403).json({message: "Confirm Your Email to Upload Files"})
             }
 
-            console.log(userId)
             const fileName = req.body.fileName
             const fileUrl = req.file.path
 
@@ -41,7 +39,6 @@ const uploadFile = async (req, res) => {
             res.status(400).json({message: "Either File or File Name Missing"})
         }
     } catch (err) {
-        console.log(err)
         res.status(500).json({message: err.message})
     }
 }
@@ -66,7 +63,6 @@ const getSharableLink = async (req, res) => {
             res.status(404).json({message: "No File Found With This Id"})
         }
     } catch (err) {
-        console.log(err)
         res.status(400).json({message: "Unexpected Server Error"})
     }
 }
@@ -83,7 +79,6 @@ const deleteFile = async (req, res) => {
         })
 
         if (file) {
-            console.log('file found')
             const filePath = path.resolve(file.fileUrl);
 
             // Delete if the file exists
@@ -100,7 +95,6 @@ const deleteFile = async (req, res) => {
             res.status(404).json({message: "No File Found With This Id"})
         }
     } catch (err) {
-        console.log(err)
         res.status(400).json({message: "Unexpected Server Error"})
     }
 }

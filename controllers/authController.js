@@ -4,9 +4,6 @@ const prisma = require('../config/db')
 
 const {userValidator} = require("../util/userValidator")
 const {sendConfirmationEmail} = require("../util/mailService")
-const {redisClient} = require("../config/redis");
-const path = require("path");
-const fs = require("fs");
 
 const register = async (req, res) => {
     const {email, password} = req.body
@@ -42,7 +39,7 @@ const register = async (req, res) => {
             } else if (err.code === 'P2002') {
                 res.status(400).json({message: "Email already in use"})
             } else {
-                console.log(err)
+
                 res.status(500).json({message: "Internal Server Error"})
             }
         }
@@ -74,7 +71,7 @@ const login = async (req, res) => {
                 res.status(404).json({message: "No User Found With These Credentials"})
             }
         } catch (err) {
-            console.log(err)
+
             res.status(500).json({message: "Email or password missing"})
         }
     } else {
@@ -126,7 +123,7 @@ const confirm = async (req, res) => {
 
         return res.status(200).json({message: 'Email successfully verified!'});
     } catch (err) {
-        console.log(err)
+
         if (err.name === 'TokenExpiredError') {
             // Handle expired token
             return res.status(400).json({message: 'Expired link'});

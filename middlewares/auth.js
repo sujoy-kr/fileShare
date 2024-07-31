@@ -8,7 +8,7 @@ const required = (req, res, next) => {
             req.data = jwt.verify(token, process.env.JWT_SECRET)
             next()
         } catch (e) {
-            console.log(e)
+
             res.status(403).json({message: 'invalid token'})
         }
     } else {

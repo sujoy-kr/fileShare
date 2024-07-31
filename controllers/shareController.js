@@ -36,7 +36,6 @@ const share = async (req, res) => {
 
                     // Check if the file exists
                     if (fs.existsSync(filePath)) {
-                        console.log('exists')
                         await redisClient.setEx(token, REDIS_EXP, filePath);
                         // Send the file for download
                         res.status(200).download(filePath);
@@ -53,12 +52,11 @@ const share = async (req, res) => {
         }
 
     } catch (err) {
-        console.log(err)
         if (err.name === 'TokenExpiredError') {
             // Handle expired token
             return res.status(400).json({message: 'Expired link'});
         }
-        
+
         res.status(500).json({message: "Unexpected Server Error"})
     }
 }

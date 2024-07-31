@@ -26,7 +26,6 @@ const profile = async (req, res) => {
 
         res.status(200).json(user)
     } catch (err) {
-        console.log(err)
         res.status(500).json({message: "Unexpected Server Error"})
     }
 }
@@ -75,7 +74,6 @@ const deleteUser = async (req, res) => {
 
         res.status(200).json({message: "User and Their Corresponding Files Deleted Successfully"})
     } catch (err) {
-        console.log(err)
         res.status(500).json({message: "Unexpected Server Error"})
     }
 }

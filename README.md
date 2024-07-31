@@ -13,7 +13,6 @@ links.
 5. [Environment Variables](#environment-variables)
 6. [Database Schema](#database-schema)
 7. [API Endpoints](#api-endpoints)
-8. [Routes](#routes)
 
 ## Project Description
 
@@ -35,6 +34,9 @@ performance, and comprehensive error handling.
 - **Validation**: Use Joi for validating user inputs.
 - **Security**: Enhance security with Helmet and prevent spam attacks with Express Rate Limiter.
 - **Password Management**: Secure password storage with bcrypt hashing.
+- **Token Management**: Use `jsonwebtoken` for validating JWTs used in authentication, file access, and email
+  confirmation.
+-
 
 ## Technologies
 
@@ -50,6 +52,8 @@ performance, and comprehensive error handling.
 - **Joi**: Validation library for user inputs.
 - **Helmet**: Middleware for securing Express apps by setting various HTTP headers.
 - **Express Rate Limiter**: Middleware for rate-limiting requests to prevent abuse.
+- **jsonwebtoken**: Library for managing JWTs, including validation for user authentication, file access, and email
+  confirmation.
 
 ## Setup and Installation
 
@@ -72,7 +76,7 @@ cd fileShare
 npm install
 ```
 
-### Set Up Environment Variables
+### Environment Variables
 
 Create a `.env` file in the root of the project with the following content:
 
@@ -163,23 +167,22 @@ The server will run on `http://localhost:3000`.
 - **GET /api/user/profile**
     - **Description**: Get user data via token through Authorization header.
     - **Request Body**: Form-data with `file` and `fileName`
-    -
-        - **Response**: `{
-          "id": 35,
-          "email": "thesujoykr@gmail.com",
-          "files": [
-          {
-          "id": 43,
-          "fileName": "sdfsd777",
-          "createdAt": "2024-07-31T06:23:48.219Z"
-          },
-          {
-          "id": 44,
-          "fileName": "sdfsd777",
-          "createdAt": "2024-07-31T06:25:47.767Z"
-          }
-          ]
-          }`
+    - **Response**: `{
+      "id": 35,
+      "email": "thesujoykr@gmail.com",
+      "files": [
+      {
+      "id": 43,
+      "fileName": "sdfsd777",
+      "createdAt": "2024-07-31T06:23:48.219Z"
+      },
+      {
+      "id": 44,
+      "fileName": "sdfsd777",
+      "createdAt": "2024-07-31T06:25:47.767Z"
+      }
+      ]
+      }`
 
 
 - **DELETE /api/user/delete**

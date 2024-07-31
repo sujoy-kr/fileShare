@@ -21,7 +21,6 @@ const sendConfirmationEmail = async (to, code) => {
 
     try {
         await transporter.sendMail(mailOptions)
-        console.log('email sent')
     } catch (err) {
         console.log('nodemailer error', err)
     }
