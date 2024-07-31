@@ -86,7 +86,7 @@ SALT_ROUND=15
 JWT_SECRET=sujoykr
 HOST_LINK=localhost:3000
 NODEMAILER_EMAIL=email@domain.com
-NODEMAILER_PASS="wkkb flvk hasd lkjw" // google account app password
+NODEMAILER_PASS="wkkb flvk hasd lkjw" // google account app password https://myaccount.google.com/apppasswords
 ```
 
 ### Run Migrations
