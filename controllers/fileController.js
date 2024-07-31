@@ -20,6 +20,10 @@ const uploadFile = async (req, res) => {
                 return res.status(404).json({message: "No User Found With This Token"})
             }
 
+            if (!foundUser.emailConfirmed) {
+                return res.status(403).json({message: "Confirm Your Email to Upload Files"})
+            }
+
             console.log(userId)
             const fileName = req.body.fileName
             const fileUrl = req.file.path
