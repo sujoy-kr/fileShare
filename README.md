@@ -1,9 +1,5 @@
 # Secure File Sharing Service
 
-A backend service for secure file sharing, built using Node.js, Express, Prisma, PostgreSQL, Redis, JWT authentication,
-and file upload functionality. This service allows users to securely upload, manage, and share files with time-limited
-links.
-
 ## Table of Contents
 
 1. [Project Description](#project-description)
