@@ -58,6 +58,7 @@ const share = async (req, res) => {
             // Handle expired token
             return res.status(400).json({message: 'Expired link'});
         }
+        
         res.status(500).json({message: "Unexpected Server Error"})
     }
 }

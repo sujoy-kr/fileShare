@@ -2,7 +2,6 @@ const prisma = require('../config/db')
 const jwt = require("jsonwebtoken")
 const path = require("path");
 const fs = require("fs");
-const {redisClient} = require("../config/redis");
 
 const uploadFile = async (req, res) => {
     try {
@@ -10,6 +9,17 @@ const uploadFile = async (req, res) => {
             console.log(req.data)
             const user = req.data
             const userId = parseInt(user.userId)
+
+            const foundUser = await prisma.user.findUnique({
+                where: {
+                    id: userId
+                }
+            })
+
+            if (!foundUser) {
+                return res.status(404).json({message: "No User Found With This Token"})
+            }
+
             console.log(userId)
             const fileName = req.body.fileName
             const fileUrl = req.file.path
@@ -22,7 +32,6 @@ const uploadFile = async (req, res) => {
 
             if (file) {
                 res.status(201).json({message: "File Uploaded"})
-
             }
         } else {
             res.status(400).json({message: "Either File or File Name Missing"})
@@ -72,16 +81,15 @@ const deleteFile = async (req, res) => {
         if (file) {
             console.log('file found')
             const filePath = path.resolve(file.fileUrl);
-            await prisma.file.delete({
-                where: {id}
-            })
-
-            console.log('file deleted')
 
             // Delete if the file exists
             if (fs.existsSync(filePath)) {
                 fs.unlinkSync(filePath)
             }
+
+            await prisma.file.delete({
+                where: {id}
+            })
 
             res.status(200).json({message: "File Deleted"})
         } else {
