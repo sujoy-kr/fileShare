@@ -8,11 +8,13 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
-  files     File[]   @relation("UserFiles")
+  id                Int      @id @default(autoincrement())
+  email             String   @unique
+  password          String
+  createdAt         DateTime @default(now())
+  files             File[]   @relation("UserFiles")
+  emailConfirmed    Boolean  @default(false)
+  confirmationToken String?
 }
 
 model File {
